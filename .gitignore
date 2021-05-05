@@ -20,7 +20,9 @@ downloads/
 eggs/
 .eggs/
 parts/
+.vscode/
 sdist/
+db.sqlite3
 var/
 wheels/
 pip-wheel-metadata/
