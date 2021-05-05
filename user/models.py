@@ -1,32 +1,37 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser,AbstractUser,UserManager
+from django.contrib.auth.models import AbstractBaseUser, AbstractUser, UserManager,PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
-class User(AbstractBaseUser):
+
+class User(AbstractBaseUser, PermissionsMixin):
     username_validator = UnicodeUsernameValidator()
 
     username = models.CharField(
         _('username'),
         max_length=150,
         unique=True,
-        help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        help_text=_(
+            'Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
         validators=[username_validator],
         error_messages={
             'unique': _("A user with that username already exists."),
         },
     )
-    email = models.EmailField(_('email'),blank=True)
-    phone_number = models.CharField(_('phone number'),blank=True,max_length=11)
-    avatar = models.ImageField(_('avatar'),upload_to='users/avatar/',blank=True)
-    bio = models.TextField(_('bio'),blank=True)
-    website = models.URLField(_('website'),blank=True)
-    is_verified = models.BooleanField(_('verified'),default=False)
+    email = models.EmailField(_('email'), blank=True)
+    phone_number = models.CharField(
+        _('phone number'), blank=True, max_length=11)
+    avatar = models.ImageField(
+        _('avatar'), upload_to='users/avatar/', blank=True)
+    bio = models.TextField(_('bio'), blank=True)
+    website = models.URLField(_('website'), blank=True)
+    is_verified = models.BooleanField(_('verified'), default=False)
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
-        help_text=_('Designates whether the user can log into this admin site.'),
+        help_text=_(
+            'Designates whether the user can log into this admin site.'),
     )
     is_active = models.BooleanField(
         _('active'),
@@ -63,5 +68,3 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return self.username
-
-
