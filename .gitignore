@@ -21,6 +21,7 @@ eggs/
 .eggs/
 parts/
 sdist/
+db.sqlite3
 var/
 wheels/
 pip-wheel-metadata/
