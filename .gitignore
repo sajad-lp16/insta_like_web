@@ -22,6 +22,7 @@ eggs/
 parts/
 .vscode/
 sdist/
+media/
 db.sqlite3
 var/
 wheels/
