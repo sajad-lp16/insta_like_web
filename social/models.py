@@ -1,3 +1,4 @@
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from lib.common_models import BaseModel
 from django.utils.translation import ugettext_lazy as _
@@ -19,7 +20,7 @@ class Post(BaseModel):
         verbose_name_plural = _('posts')
 
     def __str__(self):
-        return self.user
+        return str(self.user)
 
 
 class Media(BaseModel):
@@ -31,14 +32,17 @@ class Media(BaseModel):
     )
     post = models.ForeignKey(Post, related_name="media",
                              on_delete=models.CASCADE)
-    file = models.FileField(_('file'), upload_to='posts/Y-m/')
+    file = models.FileField(_('file'),
+                            upload_to='posts/Y-m/',
+                            validators=[FileExtensionValidator(
+                                allowed_extensions=['jpg', 'jpeg', 'mp4', 'flv', 'mkv'])])
 
     class Meta:
         verbose_name = _('media')
         verbose_name_plural = _('media')
 
     def __str__(self):
-        return "{}  -  {}".format(str(self.post), self.get_media_type_display())
+        return "{}".format(str(self.post))
 
 
 class Tag(BaseModel):

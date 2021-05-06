@@ -21,12 +21,18 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html')),
+    path('', include('user.urls')),
     path('admin/', admin.site.urls),
-    path('auth/', include('user.urls')),
 ]
 
 if settings.DEBUG:
+    import debug_toolbar
+
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATICFILES_DIRS)
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ]

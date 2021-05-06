@@ -13,9 +13,9 @@ class Comment(BaseModel):
     post = models.ForeignKey(
         Post, related_name='comments', on_delete=models.CASCADE)
     content = models.TextField(_('comment'))
-    content = models.TextField(_('caption'))
+    caption = models.TextField(_('caption'))
     reply_to = models.ForeignKey(
-        'self', related_name='replies', on_delete=models.CASCADE)
+        'self', default=None, related_name='replies', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('comment')
@@ -24,12 +24,13 @@ class Comment(BaseModel):
     def __str__(self):
         return "{} on {}".format(str(self.user), str(self.post))
 
+
 class Like(BaseModel):
     user = models.ForeignKey(
         User, related_name='likes', on_delete=models.CASCADE)
     post = models.ForeignKey(
         Post, related_name='likes', on_delete=models.CASCADE)
-    
+
     class Meta:
         verbose_name = _('like')
         verbose_name_plural = _('likes')
