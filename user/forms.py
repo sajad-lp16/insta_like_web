@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model,authenticate
 User = get_user_model()
 
 
-class RegisterationForm(forms.Form):
+class RegistrationForm(forms.Form):
     username = forms.CharField(max_length=150, widget=forms.TextInput(
         attrs={'id': 'username'}
     ))

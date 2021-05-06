@@ -1,15 +1,11 @@
-from django.shortcuts import render
 from django.views import generic
-from django.urls import reverse_lazy
-from django.shortcuts import redirect
-from django.http import HttpResponse
 from django.contrib.auth import login
 
 from .import forms
 
 
 class RegisterView(generic.FormView):
-    form_class = forms.RegisterationForm
+    form_class = forms.RegistrationForm
     template_name = 'register.html'
     success_url = '/'
 
