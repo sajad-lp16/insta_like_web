@@ -3,6 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.hashers import make_password
 
+from activity import tasks
+
 User = get_user_model()
 
 
@@ -26,7 +28,10 @@ class RegistrationForm(forms.Form):
             return self.cleaned_data
 
     def save(self):
-        return User.objects.create_user(**self.cleaned_data)
+        user = User.objects.create_user(**self.cleaned_data)
+        tasks.send_phone_verification_code.delay(user.username)
+        tasks.send_email_verification_code.delay(user.email)
+        return user
 
 
 class LoginForm(forms.Form):

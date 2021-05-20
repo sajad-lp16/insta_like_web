@@ -47,14 +47,9 @@ class ProfileDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
         user = self.get_object()
+        followers = user.followers.all()
         context['posts_count'] = user.posts.count()
-        context['followers'] = user.followers.count()
+        context['followers'] = followers.count()
         context['followings'] = user.followings.count()
+        context['is_followed'] = followers.filter(from_user=self.request.user, to_user=user).exists()
         return context
-
-
-def get_req(request):
-    if request.method == "POSt":
-        print(request.user.username)
-        return JsonResponse({'status':200})
-    return JsonResponse({'status':400})

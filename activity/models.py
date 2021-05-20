@@ -15,7 +15,7 @@ class Comment(BaseModel):
     content = models.TextField(_('comment'))
     caption = models.TextField(_('caption'))
     reply_to = models.ForeignKey(
-        'self', default=None, related_name='replies', on_delete=models.CASCADE)
+        'self', blank=True, null=True, related_name='replies', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('comment')

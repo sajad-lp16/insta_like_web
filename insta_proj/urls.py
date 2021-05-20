@@ -18,10 +18,17 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
+from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html')),
     path('', include('user.urls')),
+    path('', include('relation.urls')),
+    path('social/',include('social.urls')),
+    path('activity/',include('activity.urls')),
+
+    path('api-token-auth/', obtain_jwt_token),
+    path('api/', include('user.api.urls')),
     path('admin/', admin.site.urls),
 ]
 
