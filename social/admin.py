@@ -17,10 +17,10 @@ class PostTagInline(admin.TabularInline):
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('user', 'location')
-    inlines = (PostMediaInline,)
+    inlines      = (PostMediaInline,)
 
 
 @admin.register(models.Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ('title',)
-    inlines = (PostTagInline, UserTagInline)
+    inlines      = (PostTagInline, UserTagInline)

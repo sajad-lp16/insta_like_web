@@ -6,11 +6,11 @@ User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model  = User
         fields = ('username', 'email', 'phone_number', 'is_verified', 'avatar')
 
 
 class UserLightSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model  = User
         fields = ('username', 'avatar', 'bio', 'is_verified')

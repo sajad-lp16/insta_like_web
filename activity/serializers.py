@@ -10,7 +10,7 @@ from user.api.serializers import UserLightSerializer
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Comment
+        model  = Comment
         fields = ('post', 'caption', 'reply_to')
 
     def validate(self, attrs):

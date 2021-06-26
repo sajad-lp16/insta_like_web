@@ -7,15 +7,15 @@ from user.api.serializers import UserSerializer
 
 class PostMediaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Media
+        model  = Media
         fields = ('file',)
 
 
 class PostSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user     = UserSerializer()
     location = LocationSerializer()
-    media = PostMediaSerializer(many=True)
+    media    = PostMediaSerializer(many=True)
 
     class Meta:
-        model = Post
+        model  = Post
         fields = ('user', 'created_time', 'caption', 'location', 'media')

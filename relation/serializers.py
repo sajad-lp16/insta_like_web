@@ -5,11 +5,11 @@ from .models import Relation
 
 
 class RelationSerializer(serializers.ModelSerializer):
-    from_user = UserLightSerializer()
+    from_user    = UserLightSerializer()
     is_following = serializers.SerializerMethodField()
 
     class Meta:
-        model = Relation
+        model  = Relation
         fields = ('from_user', 'created_time', 'is_following')
 
     def get_is_following(self, obj):

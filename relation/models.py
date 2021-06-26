@@ -7,17 +7,15 @@ User = get_user_model()
 
 
 class Relation(BaseModel):
-    from_user = models.ForeignKey(
-        User, related_name='followings', on_delete=models.CASCADE)
-    to_user = models.ForeignKey(
-        User,  related_name='followers', on_delete=models.CASCADE)
+    from_user = models.ForeignKey(User, related_name='followings', on_delete=models.CASCADE)
+    to_user   = models.ForeignKey(User,  related_name='followers', on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = _('relation')
+        verbose_name        = _('relation')
         verbose_name_plural = _('relations')
 
     def __str__(self):
         return "({follower}) >>> ({following})".format(
-            follower=self.from_user.username,
+            follower =self.from_user.username,
             following=self.to_user.username,
         )
