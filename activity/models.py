@@ -8,17 +8,15 @@ User = get_user_model()
 
 
 class Comment(BaseModel):
-    user = models.ForeignKey(
-        User, related_name='comments', on_delete=models.CASCADE)
-    post = models.ForeignKey(
-        Post, related_name='comments', on_delete=models.CASCADE)
-    content = models.TextField(_('comment'))
-    caption = models.TextField(_('caption'))
+    user     = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
+    post     = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    content  = models.TextField(_('comment'))
+    caption  = models.TextField(_('caption'))
     reply_to = models.ForeignKey(
         'self', blank=True, null=True, related_name='replies', on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = _('comment')
+        verbose_name        = _('comment')
         verbose_name_plural = _('comments')
 
     def __str__(self):
@@ -26,13 +24,11 @@ class Comment(BaseModel):
 
 
 class Like(BaseModel):
-    user = models.ForeignKey(
-        User, related_name='likes', on_delete=models.CASCADE)
-    post = models.ForeignKey(
-        Post, related_name='likes', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='likes', on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = _('like')
+        verbose_name        = _('like')
         verbose_name_plural = _('likes')
 
     def __str__(self):

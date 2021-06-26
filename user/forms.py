@@ -18,7 +18,7 @@ class RegistrationForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={'id': 'password'}
     ))
-    avatar = forms.FileField(widget=forms.FileInput(), required=False)
+    avatar   = forms.FileField(widget=forms.FileInput(), required=False)
 
     def clean(self):
         username = self.cleaned_data.get('username')
@@ -52,8 +52,8 @@ class LoginForm(forms.Form):
 
 class UpdateForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ('username', 'password', 'avatar')
+        model   = User
+        fields  = ('username', 'password', 'avatar')
 
         widgets = {
             'password': forms.PasswordInput()

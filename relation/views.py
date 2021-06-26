@@ -28,9 +28,9 @@ class FollowView(generic.FormView):
 
 
 class FollowersListApiView(generics.ListAPIView):
-    queryset = Relation.objects.select_related('from_user').all()
-    serializer_class = RelationSerializer
-    permission_classes = (IsAuthenticated,)
+    queryset               = Relation.objects.select_related('from_user').all()
+    serializer_class       = RelationSerializer
+    permission_classes     = (IsAuthenticated,)
     authentication_classes = (JSONWebTokenAuthentication,)
 
     def get_queryset(self):
